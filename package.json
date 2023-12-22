@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/FelipeRubelBorges/cypress-project#readme",
   "dependencies": {
-    "cypress": "^12.7.0"
+    "cypress": "^13.6.1"
   },
   "description": ""
 }
