@@ -53,42 +53,12 @@ context('Cypress.Cookies', () => {
     cy.setCookie('fakeCookie', '123ABC')
   })
 
-  it('.preserveOnce() - preserve cookies by key', () => {
-    // normally cookies are reset after each test
-    cy.getCookie('fakeCookie').should('not.be.ok')
-
-    // preserving a cookie will not clear it when
-    // the next test starts
-    cy.setCookie('lastCookie', '789XYZ')
-    Cypress.Cookies.preserveOnce('lastCookie')
-  })
-
-  it('.defaults() - set defaults for all cookies', () => {
-    // now any cookie with the name 'session_id' will
-    // not be cleared before each new test runs
-    Cypress.Cookies.defaults({
-      whitelist: 'session_id',
-    })
+  it('reads a cookie written by the test', () => {
+    cy.setCookie('session_id', 'example-session')
+    cy.getCookie('session_id').its('value').should('eq', 'example-session')
   })
 })
 
-
-context('Cypress.Server', () => {
-  beforeEach(() => {
-    cy.visit('https://example.cypress.io/cypress-api')
-  })
-
-  // Permanently override server options for
-  // all instances of cy.server()
-
-  // https://on.cypress.io/cypress-server
-  it('.defaults() - change default config of server', () => {
-    Cypress.Server.defaults({
-      delay: 0,
-      force404: false,
-    })
-  })
-})
 
 context('Cypress.arch', () => {
   beforeEach(() => {
@@ -147,32 +117,9 @@ context('Cypress.dom', () => {
   })
 })
 
-context('Cypress.env()', () => {
-  beforeEach(() => {
-    cy.visit('https://example.cypress.io/cypress-api')
-  })
-
-  // We can set environment variables for highly dynamic values
-
-  // https://on.cypress.io/environment-variables
-  it('Get environment variables', () => {
-    // https://on.cypress.io/env
-    // set multiple environment variables
-    Cypress.env({
-      host: 'veronica.dev.local',
-      api_server: 'http://localhost:8888/v1/',
-    })
-
-    // get environment variable
-    expect(Cypress.env('host')).to.eq('veronica.dev.local')
-
-    // set environment variable
-    Cypress.env('api_server', 'http://localhost:8888/v2/')
-    expect(Cypress.env('api_server')).to.eq('http://localhost:8888/v2/')
-
-    // get all environment variable
-    expect(Cypress.env()).to.have.property('host', 'veronica.dev.local')
-    expect(Cypress.env()).to.have.property('api_server', 'http://localhost:8888/v2/')
+context('Cypress.expose()', () => {
+  it('reads non-sensitive configuration', () => {
+    expect(Cypress.expose('exampleHost')).to.eq('example.local')
   })
 })
 

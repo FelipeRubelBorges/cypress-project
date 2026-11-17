@@ -4,9 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "cy:run": "cypress run",
-	 "cypress:open": "cypress open"
-
+    "cy:run": "cypress run",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -19,8 +18,11 @@
     "url": "https://github.com/FelipeRubelBorges/cypress-project/issues"
   },
   "homepage": "https://github.com/FelipeRubelBorges/cypress-project#readme",
-  "dependencies": {
-    "cypress": "^13.6.1"
+  "description": "",
+  "devDependencies": {
+    "cypress": "16.3.0"
   },
-  "description": ""
+  "engines": {
+    "node": ">=22.15.0"
+  }
 }
